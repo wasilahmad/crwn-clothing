@@ -1,0 +1,23 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBHR8HZDjf0QwpkWFO6INJah1XkC57L51s",
+    authDomain: "crwn-db-952ff.firebaseapp.com",
+    databaseURL: "https://crwn-db-952ff.firebaseio.com",
+    projectId: "crwn-db-952ff",
+    storageBucket: "crwn-db-952ff.appspot.com",
+    messagingSenderId: "375950129391",
+    appId: "1:375950129391:web:2e5ea67e1b6cb1bf43c31a",
+    measurementId: "G-Y827XXCWHK"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
