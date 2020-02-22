@@ -4,7 +4,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import './sign-in-styles.scss';
 
 // firebase auth services
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 export class SignIn extends Component {
 
@@ -23,8 +23,20 @@ export class SignIn extends Component {
         this.setState({ [name]: value });
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
+
+        const { email, password } = this.state;
+        
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({
+                email:'',
+                password:''
+            });
+        }catch(error) {
+            console.error(error);
+        }
     }
 
     render() {
