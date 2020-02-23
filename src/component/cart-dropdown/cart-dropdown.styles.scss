@@ -16,9 +16,13 @@
       display: flex;
       flex-direction: column;
       overflow: auto;
+ 
+      & > p {
+        text-align: center;
+      }
     }
   
     button {
       margin-top: auto;
     }
-  }
+}
