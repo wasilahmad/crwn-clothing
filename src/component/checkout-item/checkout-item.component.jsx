@@ -1,13 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectCartItems } from '../../redux/cart/cart.selectors';
-
-import { removeItem } from '../../redux/cart/cart.action';
+import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cart.action';
 
 import './checkout-item.styles.scss';
 
-const CheckoutItem = ({cartItem, removeCartItem}) => {
+const CheckoutItem = ({cartItem, clearItem, addItem, removeItem}) => {
     const { imageUrl, name, price, quantity } = cartItem;
     return (
         <div className='checkout-item'>
@@ -15,15 +12,25 @@ const CheckoutItem = ({cartItem, removeCartItem}) => {
                 <img src={imageUrl} alt={name} />
             </div>
             <span className='name'>{name}</span>
-            <span className='quantity'>{price}</span>
-            <span className='price'>{quantity}</span>
-            <div className='remove-button' onClick={() => removeCartItem(cartItem)}>&#10005;</div>
+            <span className='quantity'>
+                <div className='arrow' onClick={() => removeItem(cartItem)}>
+                &#10094;
+                </div>
+                <span className='value'>{quantity}</span>
+                <div className='arrow' onClick={() => addItem(cartItem)}>
+                &#10095;
+                </div>
+            </span>
+            <span className='price'>{price}</span>
+            <div className='remove-button' onClick={() => clearItem(cartItem)}>&#10005;</div>
         </div>
     );
 }
 
 const mapDispatchToProps = dispatch => ({
-    removeCartItem: item => dispatch(removeItem(item))
+    clearItem: item => dispatch(clearItemFromCart(item)),
+    addItem: item => dispatch(addItem(item)),
+    removeItem: item => dispatch(removeItem(item))
 })
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);
