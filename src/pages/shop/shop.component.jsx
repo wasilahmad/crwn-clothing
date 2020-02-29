@@ -1,28 +1,22 @@
-/* eslint-disable no-useless-constructor */
-import React, { Component } from 'react';
-import SHOP_DATA from './shop.data';
+import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCollection } from '../../redux/shop/shop.selectors';
+
 import CollectionPreview from '../../component/collection-preview/collection-preview.component';
 
-export class Shop extends Component {
-    constructor() {
-        super();
-        
-        this.state = {
-            collection: SHOP_DATA
-        }
-    }
+const Shop = ({collection}) =>  (
+    <div className="shop-page">
+        {collection.map(({id, ...otherCollectionProps}) => {
+            return (
+                <CollectionPreview key={id} {...otherCollectionProps} />
+            )
+        })}
+    </div>
+);
 
-    render() {
-        return (
-            <div className="shop-page">
-                {this.state.collection.map(({id, ...otherCollectionProps}) => {
-                    return (
-                        <CollectionPreview key={id} {...otherCollectionProps} />
-                    )
-                })}
-            </div>
-        );
-    }
-}
+const mapStateToProps = createStructuredSelector({
+    collection: selectCollection
+})
 
-export default Shop;
+export default connect(mapStateToProps)(Shop);
