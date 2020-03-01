@@ -24,8 +24,14 @@
     }
   
     .total {
-      margin-top: 30px;
-      margin-left: auto;
       font-size: 36px;
+      margin-left: auto;
+    }
+
+    .pay-summary {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 40px 0;
     }
   }
