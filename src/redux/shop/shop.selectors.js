@@ -7,17 +7,7 @@ export const selectShopCollection = createSelector(
     shop => shop.collection
 );
 
-const COLLECTION_ID_MAP = {
-    hats:1,
-    sneakers:2,
-    jackets:3,
-    womens:4,
-    mens:5
-};
-
 export const selectCollection = collectionUrlParam => createSelector(
     [selectShopCollection],
-    collection => collection.find( collectionItem =>
-        collectionItem.id === COLLECTION_ID_MAP[collectionUrlParam]
-    )
+    collection => collection[collectionUrlParam]
 );
