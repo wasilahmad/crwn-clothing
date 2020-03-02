@@ -16,7 +16,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // method to save user information into firestore
-
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if(!userAuth) return;
 
@@ -41,10 +40,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-
+// method to store document into collection
 export const addCollectionsAndDocuments = async (collectionKey, objectToAdd) => {
     const collectionRef = firestore.collection(collectionKey);
     // console.log( collectionRef);
@@ -60,6 +56,25 @@ export const addCollectionsAndDocuments = async (collectionKey, objectToAdd) => 
     
     return await batch.commit();
 }
+
+//  map firebase collection to our frontend shop data
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map( doc => {
+        const { title, items } = doc.data(); // returns doc object data
+
+        return {
+            routeName: encodeURI(title.toLowerCase()), // encodeURI is js method that takes valid URL string
+            id: doc.id,
+            title,
+            items    
+        }
+    });
+
+    console.log('transformedCollection:', transformedCollection);
+}
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });

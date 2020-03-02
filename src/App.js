@@ -9,21 +9,20 @@ import SignInAndSignUpPage from './pages/sing-in-and-sign-up/sign-in-and-sign-up
 import CheckoutPage from './pages/checkout/checkout.component';
 
 // firebase auth service
-import { auth, createUserProfileDocument, addCollectionsAndDocuments } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { connect } from 'react-redux';
 
 // memoized selectors to enhance performance 
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { setCurrentUser } from './redux/user/user.action';
-import { selectCollectionForPreview } from './redux/shop/shop.selectors';
 
 class App extends React.Component {
   
   unSubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionArray } = this.props;
+    const { setCurrentUser} = this.props;
     this.unSubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
       if( userAuth ) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -41,10 +40,8 @@ class App extends React.Component {
 
       // store user into local state      
       setCurrentUser(userAuth);
-      // console.log("User Auth: ", userAuth);
-      addCollectionsAndDocuments('collections', collectionArray.map(({title, items}) => ({title, items})));
+      // console.log("User Auth: ", userAuth);      
     });
-
   }
 
   // to prevent memory leak when component not mounted
@@ -68,8 +65,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  collectionArray: selectCollectionForPreview
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
