@@ -26,7 +26,8 @@ class Shop extends React.Component {
     componentDidMount() {
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
-        this.unsubscribeFromSnapshot = collectionRef.onSnapshot( async snapshot => {
+                
+        collectionRef.get().then( snapshot => {
             // console.log(snapshot);
             
             // to check converted firebase shop collections data
@@ -39,10 +40,11 @@ class Shop extends React.Component {
             // to hide spinner after collection data loaded
             this.setState({ loading:false });
         });
+        
     }
 
     componentWillUnmount() {
-        this.unsubscribeFromSnapshot();
+        // this.unsubscribeFromSnapshot();
     }
 
     render(){
