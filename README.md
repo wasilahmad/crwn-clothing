@@ -1,4 +1,14 @@
-This project [demo](https://demo-crown-app.herokuapp.com/).
+## Demo
+[App Demo: https://demo-crown-app.herokuapp.com/](https://demo-crown-app.herokuapp.com/)
+![Screenshot](https://github.com/wasilahmad/crwn-clothing/blob/master/public/crown-app.png 'App Screenshot')
+
+
+## What You'll Learn
+-   React-redux
+-   Middleware 
+-   redux-thunk
+
+
 
 ## Available Scripts
 
