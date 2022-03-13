@@ -5,9 +5,13 @@
 
 
 ## What You'll Learn
--   React-redux
--   Middleware 
--   redux-thunk
+-   Basics of reacts
+-   Nested components
+-   HOC Comonents
+-   Routing
+-   Use of middleware
+-   Firebase authentication and fetching data from firebase
+-   Integration of Stripe Payment
 
 
 
